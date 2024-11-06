@@ -190,7 +190,7 @@
             <p id="total-price">Total Price: ₹12,999</p>
 
             <!-- User Details Form -->
-            <div class="order-form">
+            <div class="order-form" id="order-form">
                 <h3>Enter Your Details</h3>
                 <form id="checkout-form">
                     <div class="form-group">
@@ -236,7 +236,7 @@
         // Checkout function to send order details to the server
         async function checkout() {
             try {
-                const response = await fetch('https://nitrobe-server-production.up.railway.app/create-payment-link', { // Use your actual Railway.app URL
+                const response = await fetch('https://nitrobe-server-production.up.railway.app/create-payment-link', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -254,10 +254,12 @@
 
                 const data = await response.json();
                 if (data.success) {
+                    // Hide the form and display a success message
+                    document.getElementById('order-form').style.display = 'none';
                     document.getElementById('message').innerHTML = `
-        Payment link sent to <strong>${data.email}</strong>.
-        <a href="${data.paymentLink}" target="_blank">Click here to pay now</a>.
-      `;
+                        Payment link has been sent to <strong>${data.email}</strong>.<br>
+                        <a href="#" onclick="location.reload()">Continue Shopping</a>
+                    `;
                 } else {
                     document.getElementById('message').textContent = "Error creating payment link. Please try again.";
                 }
@@ -266,7 +268,6 @@
                 document.getElementById('message').textContent = "An error occurred. Please try again.";
             }
         }
-
     </script>
 </body>
 
