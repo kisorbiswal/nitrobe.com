@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nitrobe Shop</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <h1>Shop at Nitrobe</h1>
@@ -18,12 +20,95 @@
             <a href="sitemap.html">Sitemap</a>
         </nav>
     </header>
+
     <section>
         <h2>Tea Vending Machine - ₹12,999</h2>
         <p>Get all the components and instructions needed to build a DIY tea vending machine.</p>
+
+        <!-- Quantity Selector -->
+        <div class="quantity-selector">
+            <label for="quantity">Quantity:</label>
+            <button onclick="updateQuantity(-1)">-</button>
+            <input type="number" id="quantity" value="1" min="1" readonly>
+            <button onclick="updateQuantity(1)">+</button>
+        </div>
+
+        <!-- Total Price Display -->
+        <p id="total-price">Total Price: ₹12,999</p>
+
+        <!-- User Details Form -->
+        <div class="order-form">
+            <h3>Enter Your Details</h3>
+            <form id="checkout-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" required>
+
+                <button type="button" onclick="checkout()">Checkout</button>
+            </form>
+        </div>
+
+        <!-- Message Area -->
+        <div id="message" style="margin-top: 20px;"></div>
     </section>
+
     <footer>
         <p>&copy; 2024 Nitrobe. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Update quantity and price dynamically
+        const basePrice = 12999;
+
+        function updateQuantity(change) {
+            const quantityInput = document.getElementById('quantity');
+            let quantity = parseInt(quantityInput.value) + change;
+            quantity = Math.max(1, quantity); // Minimum of 1
+            quantityInput.value = quantity;
+            document.getElementById('total-price').textContent = `Total Price: ₹${basePrice * quantity}`;
+        }
+
+        // Checkout function to send order details to the server
+        async function checkout() {
+            const quantity = document.getElementById('quantity').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            if (!name || !email || !phone || quantity < 1) {
+                document.getElementById('message').textContent = "Please fill all fields correctly.";
+                return;
+            }
+
+            // Send request to server to create payment link
+            try {
+                const response = await fetch('/create-payment-link', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ itemId: 1, quantity, name, email, phone })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    document.getElementById('message').innerHTML = `
+                        Payment link sent to <strong>${email}</strong>.
+                        <a href="${data.paymentLink}" target="_blank">Click here to pay now</a>.
+                    `;
+                } else {
+                    document.getElementById('message').textContent = "Error creating payment link. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error creating payment link:", error);
+                document.getElementById('message').textContent = "An error occurred. Please try again.";
+            }
+        }
+    </script>
 </body>
+
 </html>
