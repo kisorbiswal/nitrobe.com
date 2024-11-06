@@ -240,7 +240,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        itemId: 1,
+                        itemId: 4,
                         quantity: document.getElementById('quantity').value,
                         name: document.getElementById('name').value,
                         email: document.getElementById('email').value,
@@ -257,9 +257,10 @@
                     // Hide the form and display a success message
                     document.getElementById('order-form').style.display = 'none';
                     document.getElementById('message').innerHTML = `
-                        Payment link has been sent to <strong>${data.email}</strong>.<br>
-                        <a href="#" onclick="location.reload()">Continue Shopping</a>
-                    `;
+                Payment link has been sent to <strong>${data.email}</strong>.<br>
+                Your order will be dispatched within 7 days of payment.<br>
+                <a href="#" onclick="location.reload()">Continue Shopping</a>
+            `;
                 } else {
                     document.getElementById('message').textContent = "Error creating payment link. Please try again.";
                 }
