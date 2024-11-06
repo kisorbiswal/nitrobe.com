@@ -236,7 +236,7 @@
         // Checkout function to send order details to the server
         async function checkout() {
             try {
-                const response = await fetch('https://yourapp.railway.app/create-payment-link', { // Use your actual Railway.app URL
+                const response = await fetch('https://nitrobe-server-production.up.railway.app/create-payment-link', { // Use your actual Railway.app URL
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
