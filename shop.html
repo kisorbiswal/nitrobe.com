@@ -136,6 +136,27 @@
             color: #333;
         }
 
+        .image-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .image-list img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-list p {
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            margin-top: 8px;
+        }
+
+
         /* Responsive design */
         @media (max-width: 600px) {
             .container {
@@ -176,8 +197,37 @@
 
         <section>
             <h2>Tea Tower: DIY Tea Vending Machine - ₹12,999</h2>
-            <p>Get all the components and instructions needed to assemble the DIY tea vending machine.</p>
+            <p>You will get 1 on 1 support for assembling.</p>
+            <p>Here is everything included in the package to help you assemble your tea vending machine:</p>
 
+
+            <!-- Images Section -->
+            <div class="image-list">
+                <div>
+                    <img src="./images/gantry.png" alt="Gantry Plate with Wheels">
+                    <p>Gantry Plate with Wheels</p>
+                </div>
+                <div>
+                    <img src="./images/gt2Belt.png" alt="GT2 Belt">
+                    <p>GT2 Timing Belt</p>
+                </div>
+                <div>
+                    <img src="./images/jar.png" alt="Tea Jar">
+                    <p>Stainless Steel Tea Jar</p>
+                </div>
+                <div>
+                    <img src="./images/pulley.png" alt="GT2 Pulley">
+                    <p>GT2 Aluminum Pulley</p>
+                </div>
+                <div>
+                    <img src="./images/servo.png" alt="Servo Motor">
+                    <p>Servo Motor</p>
+                </div>
+                <div>
+                    <img src="./images/Ultrasonic.png" alt="Ultrasonic Sensor">
+                    <p>HC-SR04 Ultrasonic Sensor</p>
+                </div>
+            </div>
             <!-- Quantity Selector -->
             <div class="quantity-selector">
                 <label for="quantity">Quantity:</label>
