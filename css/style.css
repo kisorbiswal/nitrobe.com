@@ -59,16 +59,31 @@ footer {
 
 .image-list img {
     width: 100%;
-    /* Ensures the image fits within the container */
+    /* Ensures images fill their containers */
     max-width: 150px;
-    /* Sets a maximum width for the images */
+    /* Limits the image width */
     height: auto;
-    /* Maintains the aspect ratio */
+    /* Maintains the original aspect ratio */
     border-radius: 8px;
+    /* Adds rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for better visuals */
     display: block;
     margin: 0 auto;
     /* Centers the image horizontally */
+}
+
+section img {
+    max-width: 100%;
+    /* Prevents images from overflowing */
+    height: auto;
+    /* Keeps aspect ratio */
+    display: block;
+    /* Ensures no unwanted inline gaps */
+    margin: 20px auto;
+    /* Centers the image in the section */
+    border-radius: 8px;
+    /* Rounded corners for consistency */
 }
 
 .image-list p {
