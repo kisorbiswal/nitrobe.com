@@ -49,6 +49,9 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Checkout Button -->
+            <button id="checkoutBtn">Checkout</button>
         </section>
 
         <footer>
@@ -57,8 +60,6 @@
         <section>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <!-- <li><a href="shop.html">Shop</a></li>
-                <li><a href="tutorials.html">Tutorials</a></li> -->
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="terms.html">Terms and Conditions</a></li>
@@ -69,6 +70,28 @@
             </ul>
         </section>
     </div>
+
+    <script>
+        document.getElementById('checkoutBtn').addEventListener('click', function () {
+            fetch('https://nitrobe-server-production.up.railway.app/phonepe', {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Server response:', data); // Log the response to check its structure
+                    if (data.success && data.data && data.data.instrumentResponse.type === 'PAY_PAGE') {
+                        window.location.href = data.data.instrumentResponse.redirectInfo.url;
+                    } else {
+                        alert('Failed to initiate payment. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while initiating payment.');
+                });
+
+        });
+    </script>
 </body>
 
 </html>
