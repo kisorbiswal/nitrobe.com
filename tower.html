@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tea</title>
+    <style>
+        /* Reset default margins and paddings */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ensure the body takes full viewport height and hides overflow */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+        }
+
+        /* Container for the entire layout */
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Checkout section at the top */
+        .checkout-section {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+            border-radius: 10px;
+        }
+
+        /* Quantity controls styling */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-btn {
+            background-color: #ffcc00; /* Yellow background */
+            border: none;
+            color: #000; /* Black text color */
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background-color: #e6b800; /* Darker yellow on hover */
+        }
+
+        .quantity {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .price-tag {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        .checkout-btn {
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0px 4px 15px rgba(255, 87, 34, 0.7);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e64a19;
+            box-shadow: 0px 6px 20px rgba(255, 87, 34, 1);
+        }
+
+        /* Cup section with background image */
+        .cup-section {
+            flex: 1;
+            background-image: url('images/papercup1.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Price tag positioned on the cup */
+        .price-tag-on-cup {
+            position: absolute;
+            top: 60%;
+            left: 57%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            color: #ffcc00;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Checkout Section at the Top -->
+        <div class="checkout-section">
+            <!-- Quantity controls -->
+            <div class="quantity-controls">
+                <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                <span class="quantity" id="quantity">1</span>
+                <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+            </div>
+
+            <!-- Total Price -->
+            <div class="price-tag" id="totalPrice">₹10</div>
+
+            <!-- Checkout Button -->
+            <form action="/checkout" method="GET">
+                <input type="hidden" id="quantityInput" name="quantity" value="1">
+                <input type="submit" value="Checkout" class="checkout-btn">
+            </form>
+        </div>
+
+        <!-- Cup Section with Price on the Cup -->
+        <div class="cup-section">
+            <div class="price-tag-on-cup">₹10</div>
+        </div>
+    </div>
+
+    <script>
+        let unitPrice = 10;
+        let quantity = 1;
+
+        function updateTotal() {
+            const totalPrice = unitPrice * quantity;
+            document.getElementById("totalPrice").innerText = "₹" + totalPrice;
+            document.getElementById("quantityInput").value = quantity;
+        }
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById("quantity").innerText = quantity;
+            updateTotal();
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById("quantity").innerText = quantity;
+                updateTotal();
+            }
+        }
+    </script>
+</body>
+
+</html>
