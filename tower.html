@@ -185,7 +185,7 @@
             const totalPrice = unitPrice * quantity;
 
             try {
-                const response = await fetch('/tower-purchase', {
+                const response = await fetch('https://nitrobe-server-production.up.railway.app/tower-purchase', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
