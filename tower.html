@@ -223,6 +223,8 @@
                             alert("Payment Successful. Order ID: " + orderNumber);
                             quantity = 1;
                             document.getElementById("quantity").innerText = quantity;
+                            const totalPrice = unitPrice * quantity;
+                            document.getElementById("totalPrice").innerText = "₹" + totalPrice;
                         },
                         theme: {
                             color: "#ffcc00"
