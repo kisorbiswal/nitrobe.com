@@ -221,6 +221,8 @@
                             // Handle successful payment
                             console.log("Payment Successful", response);
                             alert("Payment Successful. Order ID: " + orderNumber);
+                            quantity = 1;
+                            document.getElementById("quantity").innerText = quantity;
                         },
                         theme: {
                             color: "#ffcc00"
