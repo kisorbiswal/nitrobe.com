@@ -73,7 +73,7 @@
 
     <script>
         document.getElementById('checkoutBtn').addEventListener('click', function () {
-            fetch('https://nitrobe-server-production.up.railway.app/phonepe', {
+            fetch('https://nitrobe-server-production.up.railway.app/phonepe?amount=50', {
                 method: 'GET',
             })
                 .then(response => response.json())
